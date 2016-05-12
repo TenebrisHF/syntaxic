@@ -12,8 +12,8 @@ $('code').click(function() {
   // If the code block is already expanded
   if($(this).hasClass('expanded')){
 
-    // Set max-height to 200px (Hackforums default)
-    $(this).css('max-height', '200px');
+    // Animate max height to 200px (Hackforums default)
+    $(this).animate({maxHeight: '200px'}, 'slow');
 
     // Remove the expanded class
     $(this).removeClass('expanded');
@@ -21,8 +21,11 @@ $('code').click(function() {
   // If the class is not expanded
   }else{
 
-    // Set the max-height to none
-    $(this).css('max-height', 'none');
+    // Get the actual height of the code block
+    var height = this.scrollHeight;
+
+    // Animate the max-height to the actual height
+    $(this).animate({maxHeight: height}, 'slow');
 
     // Add the expanded class to the code block
     $(this).addClass('expanded');
