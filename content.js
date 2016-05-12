@@ -70,7 +70,7 @@ $(document).ready(function() {
 });
 
 // Listen for click events on code blocks
-$('code').click(function() {
+$('code').dblclick(function() {
 
   // Check if the current code block is not being edited
   if(!$(this).hasClass('editable')) {
