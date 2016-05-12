@@ -15,6 +15,9 @@ Using Syntaxic is very easy and intuitive. To change the theme, you simply click
 
 To expand code blocks, you basically click on them, and using the magic of jQuery, they'll expand.
 
+### How to update
+Updating Syntaxic for the time being requires you to delete your current version, and installing the new one again. Just follow the install steps after deleting it.
+
 ### Creating your own theme
 Follow the HighlightJS syle guide on their documentation site [here](http://highlightjs.readthedocs.io/en/latest/style-guide.html).
 
