@@ -1,11 +1,12 @@
 {
   "manifest_version": 2,
   "name": "Syntaxic",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "permissions": [
     "webNavigation",
     "tabs",
-    "http://hackforums.net/showthread.php?tid=*"
+    "http://hackforums.net/showthread.php?tid=*",
+    "storage"
   ],
   "background": {
     "scripts": ["background.js"]

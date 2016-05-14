@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <script src="jquery-2.2.3.min.js"></script>
     <script src="popup.js"></script>
+
+    <style>
+    html, body {
+      width: 275px;
+      height: auto;
+    }
+    </style>
   </head>
   <body>
+    <h3>Syntaxic Options</h3>
     <form>
       <label for="theme">Theme: </label>
-      <select name="theme">
+      <select id="theme">
         <option value="styles/default.css">Default</option>
         <option value="styles/agate.css">Agate</option>
         <option value="styles/androidstudio.css">Androidstudio</option>
@@ -83,6 +91,14 @@
         <option value="styles/zenburn.css">Zenburn</option>
       </select>
     </form>
+
+    <input id="enable-dblclick" type="checkbox"> Enable double click to expand<br>
+
+    <input id="remove-textsel" type="checkbox"> Remove text selections when expanding<br>
+
+    <p>Please note that for your options to take full effect, you must refresh the page.</p>
+
+
 
   </body>
 </html>

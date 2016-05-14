@@ -1,7 +1,9 @@
-// Create edit button
+// Create an edit button
 var edit_button = '<a class="edit-button" style="float:right;margin-right:10px;">Edit</a>';
 
-// A function to remove text selection(s)
+/**
+ * Removes all text selections in current window
+ */
 function removeTextSelection() {
 
   if (window.getSelection) {
@@ -11,6 +13,7 @@ function removeTextSelection() {
   }
 
 }
+
 
 $(document).ready(function() {
 
@@ -25,7 +28,9 @@ $(document).ready(function() {
 
   });
 
-  // Listen for click events on edit buttons
+  /*
+   * Handles the editing of code blocks
+   */
   $('.edit-button').click(function() {
 
     // Get the associated code block
@@ -82,36 +87,54 @@ $(document).ready(function() {
 
 });
 
-// Listen for click events on code blocks
-$('code').dblclick(function() {
+/*
+ * Gets options asynchronously and pass them to the expandCodeBlock handler
+ */
+chrome.storage.sync.get(['enable-dblclick', 'remove-textsel'], function (obj) {
 
-  // Remove text selection
-  removeTextSelection();
+  // If the expanding codeblocks option is enabled then initiate a listener
+  if(obj['enable-dblclick'] === true) {
+    $('code').dblclick({'remove-textsel': obj['remove-textsel']}, expandCodeBlock);
+  }
+
+});
+
+
+/*
+ * Handles the expanding of code blocks
+ */
+function expandCodeBlock(event) {
+
+  // Remove text selection only if the user has set the option to true
+  if(event.data['remove-textsel'] === true) {
+    removeTextSelection();
+  }
 
   // Check if the current code block is not being edited
-  if(!$(this).hasClass('editable')) {
+  if($(this).hasClass('editable')) {
+    return;
+  }
 
-    // If the code block is already expanded
-    if($(this).hasClass('expanded')){
+  // If the code block is already expanded
+  if($(this).hasClass('expanded')){
 
-      // Animate max height to 200px (Hackforums default)
-      $(this).animate({maxHeight: '200px'}, 'slow');
+    // Animate max height to 200px (Hackforums default)
+    $(this).animate({maxHeight: '200px'}, 'slow');
 
-      // Remove the expanded class
-      $(this).removeClass('expanded');
+    // Remove the expanded class
+    $(this).removeClass('expanded');
 
-    // If the class is not expanded
-    } else {
+  // If the class is not expanded
+  } else {
 
-      // Get the actual height of the code block
-      var height = this.scrollHeight;
+    // Get the actual height of the code block
+    var height = this.scrollHeight;
 
-      // Animate the max-height to the actual height
-      $(this).animate({maxHeight: height}, 'slow');
+    // Animate the max-height to the actual height
+    $(this).animate({maxHeight: height}, 'slow');
 
-      // Add the expanded class to the code block
-      $(this).addClass('expanded');
+    // Add the expanded class to the code block
+    $(this).addClass('expanded');
 
     }
-  }
-});
+}

@@ -10,21 +10,34 @@ function insertCSS(tabId, stylesheet) {
   });
 }
 
+/*
+ * Executed when extension is first installed
+ */
+chrome.runtime.onInstalled.addListener(function(details){
+
+  // If the script was just installed, set default options
+  if(details.reason == "install"){
+
+    chrome.storage.sync.set({
+      'stylesheet': 'styles/agate.css',
+      'enable-dblclick': true,
+      'remove-textsel': true
+    });
+
+  }
+
+});
+
 /**
  * Listens for navigation commitment events
  */
 chrome.webNavigation.onCommitted.addListener(function(details) {
 
-  // Check if a stylesheet is already is set or not
-  if(localStorage.getItem('stylesheet') === null) {
-    localStorage.setItem('stylesheet', 'styles/agate.css');
-  }
+  // Get the stylesheet from the storage and insert it
+  chrome.storage.sync.get('stylesheet', function(options){
+    insertCSS(details.tabId, options.stylesheet);
+  });
 
-  // Get the stylesheet from the local storage
-  var stylesheet = localStorage.getItem('stylesheet');
-
-  // Insert stylesheet into tab
-  insertCSS(details.tabId, stylesheet);
 });
 
 
@@ -46,11 +59,11 @@ chrome.extension.onMessage.addListener(function(request,sender,sendResponse) {
         // Get the first tab's ID
         tabId = tabs[0].id;
 
-        // Get the stylesheet from the local storage
-        var stylesheet = localStorage.getItem('stylesheet');
+        // Get the stylesheet from the storage and insert it
+        chrome.storage.sync.get('stylesheet', function(options){
+          insertCSS(tabId, options.stylesheet);
+        });
 
-        // Insert stylesheet into tab
-        insertCSS(tabId, stylesheet);
       }
     });
   }
