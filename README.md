@@ -11,9 +11,9 @@ In the near future, our extension will be on the chrome web store. That would ma
 ### How to use
 Using Syntaxic is very easy and intuitive. To change the theme, you simply click on the Syntaxic icon in yor toolbar and select your theme from the dropdown list.
 
-![alt text](http://i.imgur.com/oTmjBFv.png "Syntactic Popup")
+![alt text](http://i.imgur.com/E1I5cv2.png "Syntactic Popup")
 
-To expand code blocks, you basically click on them, and using the magic of jQuery, they'll expand.
+To expand code blocks, you basically double-click on them, and using the magic of jQuery, they'll expand.
 
 ### How to update
 Updating Syntaxic for the time being requires you to delete your current version, and installing the new one again. Just follow the install steps after deleting it.
