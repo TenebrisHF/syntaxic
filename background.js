@@ -1,3 +1,8 @@
+/*
+ * Github manifest url, used for checking for updates
+ */
+ var manifest_url = 'https://raw.githubusercontent.com/TenebrisHF/syntaxic/master/manifest.json';
+
 /**
  * Inserts a CSS stylesheet into given tab
  * @param {Number} tabId
@@ -8,6 +13,32 @@ function insertCSS(tabId, stylesheet) {
       file: stylesheet,
       allFrames: false
   });
+}
+
+/**
+ * Checks for updates from the github repository
+ * @param {String} manifest_url
+ */
+function checkForUpdates(manifest_url) {
+
+  // Ajax request for manifest url
+  $.getJSON(manifest_url, function(data){
+
+    // Get the version from the Github repository
+    latest_version = data.version;
+
+    // Get the version currently running
+    this_version = chrome.runtime.getManifest().version;
+
+    // Check if there is a new version
+    if(latest_version !== this_version) {
+
+      alert('There is a new version available for Syntaxic. Please visit the Github repository and update.');
+
+    }
+
+  });
+
 }
 
 /*
@@ -30,8 +61,8 @@ chrome.runtime.onInstalled.addListener(function(details){
 
 });
 
-/**
- * Listens for navigation commitment events
+/*
+ * Listen for navigation commitment events
  */
 chrome.webNavigation.onCommitted.addListener(function(details) {
 
@@ -43,8 +74,8 @@ chrome.webNavigation.onCommitted.addListener(function(details) {
 });
 
 
-/**
- * Listens for messages from other scripts to update stylesheet
+/*
+ * Listen for messages from other scripts to update stylesheet
  */
 chrome.extension.onMessage.addListener(function(request,sender,sendResponse) {
 
@@ -69,4 +100,14 @@ chrome.extension.onMessage.addListener(function(request,sender,sendResponse) {
       }
     });
   }
+});
+
+chrome.alarms.create('checkForUpdates', {'periodInMinutes': 5});
+
+chrome.alarms.onAlarm.addListener(function(alarm){
+
+  if(alarm.name == 'checkForUpdates') {
+    checkForUpdates(manifest_url);
+  }
+
 });
