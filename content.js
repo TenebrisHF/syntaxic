@@ -1,3 +1,17 @@
+// Create edit button
+var edit_button = '<a class="edit-button" style="float:right;margin-right:10px;">Edit</a>';
+
+// A function to remove text selection(s)
+function removeTextSelection() {
+
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges();
+  } else if (document.selection) {
+    document.selection.empty();
+  }
+
+}
+
 $(document).ready(function() {
 
   // Highlight every code block in the document
@@ -5,9 +19,6 @@ $(document).ready(function() {
 
     // Highlight the block
     hljs.highlightBlock(block);
-
-    // Create edit button
-    var edit_button = '<a class="edit-button" style="float:right;margin-right:10px;">Edit</a>';
 
     // Prepend the button to the title class
     $(edit_button).prependTo($(block).parent().prev()).data('block', block);
@@ -30,20 +41,22 @@ $(document).ready(function() {
 
       // Expand the code block if not already
       if(!$(edit_block).hasClass('expanded')) {
+
         // Get the actual height of the code block
         var height = edit_block.scrollHeight;
 
-        // Animate the max-height to the actual height (in other words, expand)
+        // Animate the max-height to the actual height
         $(edit_block).animate({maxHeight: height}, 'slow');
 
         // Add the expanded class to the code block
         $(edit_block).addClass('expanded');
+
       }
 
       // Change text of edit button
       $(this).empty().append('Stop Editing');
 
-    }else{
+    } else {
 
       // Set the code block's contenteditable attribute to false
       $(edit_block).attr('contenteditable', 'false');
@@ -72,6 +85,9 @@ $(document).ready(function() {
 // Listen for click events on code blocks
 $('code').dblclick(function() {
 
+  // Remove text selection
+  removeTextSelection();
+
   // Check if the current code block is not being edited
   if(!$(this).hasClass('editable')) {
 
@@ -85,7 +101,7 @@ $('code').dblclick(function() {
       $(this).removeClass('expanded');
 
     // If the class is not expanded
-    }else{
+    } else {
 
       // Get the actual height of the code block
       var height = this.scrollHeight;
