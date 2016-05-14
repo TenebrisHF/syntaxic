@@ -16,12 +16,14 @@ function insertCSS(tabId, stylesheet) {
 chrome.runtime.onInstalled.addListener(function(details){
 
   // If the script was just installed, set default options
-  if(details.reason == "install"){
+  if(details.reason == 'install'){
 
     chrome.storage.sync.set({
       'stylesheet': 'styles/agate.css',
+      'enable-highlight': true,
       'enable-dblclick': true,
-      'remove-textsel': true
+      'remove-textsel': true,
+      'enable-edit': true,
     });
 
   }

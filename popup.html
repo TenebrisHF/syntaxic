@@ -6,9 +6,24 @@
     <script src="popup.js"></script>
 
     <style>
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
     html, body {
       width: 275px;
       height: auto;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    .note {
+      color: #95a5a6;
+      font-size: 10px;
+      font-weight: 300;
     }
     </style>
   </head>
@@ -89,14 +104,19 @@
         <option value="styles/xcode.css">Xcode</option>
         <option value="styles/xt256.css">Xt256</option>
         <option value="styles/zenburn.css">Zenburn</option>
-      </select>
+      </select><br><br>
+
+      <input id="enable-highlight" type="checkbox"> Enable syntax highlighting for code blocks<br>
+
+      <input id="enable-dblclick" type="checkbox"> Enable double click to expand<br>
+
+      <input id="remove-textsel" type="checkbox"> Remove text selections when expanding<br>
+
+      <input id="enable-edit" type="checkbox"> Enable the editting feature<br>
+
+      <p class="note">Please note that for your options to take full effect, you must refresh the page.</p>
+
     </form>
-
-    <input id="enable-dblclick" type="checkbox"> Enable double click to expand<br>
-
-    <input id="remove-textsel" type="checkbox"> Remove text selections when expanding<br>
-
-    <p>Please note that for your options to take full effect, you must refresh the page.</p>
 
 
 
