@@ -1,7 +1,7 @@
 /*
  * Github manifest url, used for checking for updates
  */
- var manifest_url = 'https://raw.githubusercontent.com/TenebrisHF/syntaxic/master/manifest.json';
+ var manifest_url = 'https://raw.githubusercontent.com/TenebrisHF/syntaxic-chrome/master/manifest.json';
 
 /**
  * Inserts a CSS stylesheet into given tab
